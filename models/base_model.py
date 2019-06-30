@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 import uuid
-import datetime
+from datetime import datetime
 
 
 class BaseModel:
@@ -15,10 +15,17 @@ class BaseModel:
     id (str): This is the id of the instance,
     '''
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.id = str(uuid.uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
+        for key, value in kwargs.items():
+            if key != "__class__":
+                if key == "created_at" or key == "updated_at":
+                    setattr(self, key,
+                            datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
+                else:
+                    setattr(self, key, value)
 
     def __str__(self):
         '''
@@ -31,7 +38,7 @@ class BaseModel:
         '''
         Update update_at instance-s attribute
         '''
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
         '''
