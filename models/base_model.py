@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+''' BaseModel Class'''
 import uuid
 from datetime import datetime
 
@@ -45,10 +46,8 @@ class BaseModel:
         Return:
         Dictionary representation of the instance to be deserializated
         '''
-        dict_self = self.__dict__
+        dict_self = self.__dict__.copy()
         dict_self["__class__"] = self.__class__.__name__
-        print("aksjdkjs")
-        print(dict_self['created_at'].isoformat())
         dict_self.update({'created_at': dict_self['created_at'].isoformat()})
         dict_self.update({'updated_at': dict_self['updated_at'].isoformat()})
         return dict_self
