@@ -1,13 +1,13 @@
 #!/usr/bin/python3
 ''' BaseModel Class'''
+
 import uuid
 from datetime import datetime
+import models
 
 
 class BaseModel:
     '''
-    The Vehicle object contains a lot of vehicles
-
     Args:
     *args: Unused
     **kwargs: add the key-valua as attribute for the instance
@@ -17,16 +17,21 @@ class BaseModel:
     '''
 
     def __init__(self, *args, **kwargs):
+        is_new = True
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
         for key, value in kwargs.items():
+            if key == "id":
+                is_new = False
             if key != "__class__":
                 if key == "created_at" or key == "updated_at":
                     setattr(self, key,
                             datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
                 else:
                     setattr(self, key, value)
+        if(is_new):
+            models.storage.new(self)
 
     def __str__(self):
         '''
@@ -40,6 +45,7 @@ class BaseModel:
         Update update_at instance-s attribute
         '''
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         '''
