@@ -57,3 +57,7 @@ class BaseModel:
         dict_self.update({'created_at': dict_self['created_at'].isoformat()})
         dict_self.update({'updated_at': dict_self['updated_at'].isoformat()})
         return dict_self
+
+    def destroy(self):
+        ''' call FileStorage to destroy the object'''
+        models.storage.destroy(self)

@@ -3,7 +3,7 @@
 
 import json
 from ..base_model import BaseModel
-
+from ..user import User
 
 class FileStorage():
     '''
@@ -13,7 +13,8 @@ class FileStorage():
     __file_path = 'file.json'
     __objects = {}
     validClasses = {
-        "BaseModel": BaseModel
+        "BaseModel": BaseModel,
+        "User": User
     }
 
     def all(self):
@@ -44,3 +45,8 @@ class FileStorage():
                     self.__objects[key] = value
         except IOError:
             pass
+
+    def destroy(self, obj):
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        del(self.__objects[key])
+        self.save()
