@@ -37,6 +37,17 @@ class HBNBCommand(cmd.Cmd):
 
             print(toPrint)
 
+    def do_show(self, line):
+        if len(line) == 0:
+            print("** class name missing **")
+        elif line != "BaseModel":
+            print("** class doesn't exist **")
+        else:
+            objects = models.storage.all()
+            for k, v in objects.items():
+                model = str(k).split('.')
+                print(model)
+
     def help_all(self):
         print("Prints all string representation of all instances "
               "based or not on the class name.\n"
