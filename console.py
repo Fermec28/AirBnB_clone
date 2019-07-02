@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 import cmd
 from models.base_model import BaseModel
+import models
 
 
 class HBNBCommand(cmd.Cmd):
@@ -24,6 +25,22 @@ class HBNBCommand(cmd.Cmd):
             my_model = BaseModel()
             my_model.save()
             print(my_model.id)
+
+    def do_all(self, line):
+        if line != "BaseModel" and line != "":
+            print("** class doesn't exist **")
+        else:
+            objects = models.storage.all()
+            toPrint = []
+            for k, v in objects.items():
+                toPrint.append(str(v))
+
+            print(toPrint)
+
+    def help_all(self):
+        print("Prints all string representation of all instances "
+              "based or not on the class name.\n"
+              "Ex: $ all BaseModel or $ all \n")
 
     def help_create(self):
         print("Creates a new instance of BaseModel, saves "
