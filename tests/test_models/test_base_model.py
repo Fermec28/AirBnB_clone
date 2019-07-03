@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Test for User"""
+""" Test for BaseModel"""
 import unittest
 import models
 from models.base_model import BaseModel
@@ -49,6 +49,12 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsNotNone(str(self.my_model))
         self.assertIsNotNone(self.my_model.to_dict())
 
+    def test_save(self):
+        '''test save attribute'''
+        self.before = self.my_model.updated_at
+        self.my_model.save()
+        self.after = self.my_model.updated_at
+        self.assertIsNot(self.before, self.after)
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,8 +3,9 @@
 import unittest
 from models.user import User
 
-class TestUser(unittest.TestCase):
-    
 
-if __name__ = '__main__':
-    
+class TestUser(unittest.TestCase):
+    pass
+
+if __name__ == '__main__':
+    unittest.main()
