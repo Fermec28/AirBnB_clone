@@ -55,6 +55,4 @@ class FileStorage():
     def update(self, obj, att, val):
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         setattr(obj, att, val)
-        print(obj)
-
         self.save()
