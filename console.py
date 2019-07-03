@@ -50,7 +50,7 @@ class HBNBCommand(cmd.Cmd):
         idPrinted = 0
         if args[0] == '':
             print("** class name missing **")
-        elif args[0] != "BaseModel":
+        elif not args[0] in models.storage.validClasses:
             print("** class doesn't exist **")
         elif len(args) < 2:
             print("** instance id missing **")
