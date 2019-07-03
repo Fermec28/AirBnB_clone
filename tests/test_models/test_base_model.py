@@ -56,5 +56,20 @@ class TestBaseModel(unittest.TestCase):
         self.after = self.my_model.updated_at
         self.assertIsNot(self.before, self.after)
 
+    def test_dict_method(self):
+        '''test dict method'''
+        self.my_model.name = "Holberton"
+        self.my_model.my_number = 89
+        dict_obj = self.my_model.to_dict()
+
+        list_attr = ['id', 'created_at', 'updated_at', 'name',
+                     'my_number', '__class__']
+
+        nattr = 0
+        for attr in dict_obj.keys():
+            if attr in list_attr:
+                nattr += 1
+        self.assertAlmostEqual(6, nattr)
+
 if __name__ == '__main__':
     unittest.main()
