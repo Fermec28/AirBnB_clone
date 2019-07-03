@@ -2,6 +2,7 @@
 ''' File storage Class'''
 
 import json
+from ..user import User
 from ..base_model import BaseModel
 from ..state import State
 from ..city import City
