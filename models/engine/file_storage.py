@@ -51,3 +51,10 @@ class FileStorage():
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         del(self.__objects[key])
         self.save()
+
+    def update(self, obj, att, val):
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        setattr(obj, att, val)
+        print(obj)
+
+        self.save()
