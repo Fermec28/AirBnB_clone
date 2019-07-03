@@ -30,6 +30,9 @@ class BaseModel:
                             datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f'))
                 else:
                     setattr(self, key, value)
+                if hasattr(self.__class__, key):
+                    aux = type(getattr(self.__class__, key))(value)
+                    setattr(self, key, aux)
         if(is_new):
             models.storage.new(self)
 
