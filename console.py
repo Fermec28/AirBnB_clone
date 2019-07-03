@@ -93,6 +93,11 @@ class HBNBCommand(cmd.Cmd):
             except:
                 print("** no instance found **")
 
+    def help_update(self):
+        print("Updates an instance based on the class name and id by "
+              "adding or updating attribute.\n"
+              "Ex: $ update BaseModel 1234-1234-1234 name "'"First name"')
+
     def help_destroy(self):
         print("Deletes an instance based on the class name and id.\n"
               "Ex: $ destroy BaseModel 1234-1234-1234\n")
