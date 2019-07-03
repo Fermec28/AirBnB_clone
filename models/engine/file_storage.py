@@ -11,7 +11,6 @@ from ..place import Place
 from ..review import Review
 
 
-
 class FileStorage():
     '''
     Class to save the data in .json file
@@ -21,7 +20,12 @@ class FileStorage():
     __objects = {}
     validClasses = {
         "BaseModel": BaseModel,
-        "User": User
+        "User": User,
+        "State": State,
+        "City": City,
+        "Amenity": Amenity,
+        "Place": Place,
+        "Review": Review
     }
 
     def all(self):
