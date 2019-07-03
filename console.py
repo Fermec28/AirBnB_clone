@@ -7,17 +7,19 @@ from models.base_model import BaseModel
 
 class HBNBCommand(cmd.Cmd):
     '''Hbnbc command'''
-    intro = 'Welcome to the Hbnb shell. Type help or ? to list commands.\n'
-    prompt = '(hbnb) '
+    prompt = '(hbnb)'
     file = None
 
     def do_EOF(self, line):
+        """ Exit the program in EOF"""
         return True
 
     def do_quit(self, line):
+        """ quit commad to exit """
         return True
 
     def do_create(self, line):
+        """ create command"""
         args = str(line).split(' ')
         if len(line) == 0:
             print("** class name missing **")
@@ -29,6 +31,7 @@ class HBNBCommand(cmd.Cmd):
             print(my_model.id)
 
     def do_all(self, line):
+        """ list to all command """
         args = str(line).split(' ')
         objects = models.storage.all()
         toPrint = []
@@ -46,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
             print(toPrint)
 
     def do_show(self, line):
+        """ Show instance """
         args = str(line).split(' ')
         idPrinted = 0
         if args[0] == '':
@@ -63,6 +67,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, line):
+        """ destroy instance """
         args = str(line).split(' ')
         idPrinted = 0
         if args[0] == '':
@@ -80,6 +85,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_update(self, line):
+        """ update instance """
         args = shlex.split(line)
         idPrinted = 0
         if args[0] == '':
@@ -132,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
         print("Quit command to exit the program \n")
 
     def emptyline(self):
-        print("", end="")
+        """ emptyline command"""
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
