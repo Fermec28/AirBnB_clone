@@ -48,12 +48,27 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             objects = models.storage.all()
-            for k, v in objects.items():
-                model = str(k).split('.')
-                if args[1] == model[1]:
-                    idPrinted = 1
-                    print(v)
-            if idPrinted is 0:
+            try:
+                obj = objects["{}.{}".format(args[0], args[1])]
+                print(obj)
+            except:
+                print("** no instance found **")
+
+    def do_destroy(self, line):
+        args = str(line).split(' ')
+        idPrinted = 0
+        if args[0] == '':
+            print("** class name missing **")
+        elif args[0] != "BaseModel":
+            print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
+        else:
+            objects = models.storage.all()
+            try:
+                obj = objects["{}.{}".format(args[0], args[1])]
+                obj.destroy()
+            except:
                 print("** no instance found **")
 
     def help_show(self):

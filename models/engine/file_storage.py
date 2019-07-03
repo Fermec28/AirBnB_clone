@@ -5,6 +5,7 @@ import json
 from ..base_model import BaseModel
 from ..user import User
 
+
 class FileStorage():
     '''
     Class to save the data in .json file
