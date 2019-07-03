@@ -17,7 +17,7 @@ class TestBaseModel(unittest.TestCase):
         '''validate documentation module'''
         document = models.base_model.__doc__
         self.assertIsNotNone(document)
-        
+
     def test_doc_module(self):
         '''validate documentation class'''
         document = BaseModel.__doc__
