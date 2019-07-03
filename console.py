@@ -71,6 +71,10 @@ class HBNBCommand(cmd.Cmd):
             except:
                 print("** no instance found **")
 
+    def help_destroy(self):
+        print("Deletes an instance based on the class name and id.\n"
+              "Ex: $ destroy BaseModel 1234-1234-1234\n")
+
     def help_show(self):
         print("Prints the string representation of an instance "
               "based on the class name and id.\n"
