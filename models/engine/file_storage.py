@@ -11,6 +11,7 @@ from ..place import Place
 from ..review import Review
 
 
+
 class FileStorage():
     '''
     Class to save the data in .json file
@@ -55,4 +56,9 @@ class FileStorage():
     def destroy(self, obj):
         key = "{}.{}".format(obj.__class__.__name__, obj.id)
         del(self.__objects[key])
+        self.save()
+
+    def update(self, obj, att, val):
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        setattr(obj, att, val)
         self.save()

@@ -64,3 +64,7 @@ class BaseModel:
     def destroy(self):
         ''' call FileStorage to destroy the object'''
         models.storage.destroy(self)
+
+    def update(self, att, val):
+        ''' call FileStorage to destroy the object'''
+        models.storage.update(self, att, val)
