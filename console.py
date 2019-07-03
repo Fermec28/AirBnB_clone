@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import cmd
+import shlex
 import models
 from models.base_model import BaseModel
 
@@ -72,7 +73,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_update(self, line):
-        args = str(line).split(' ')
+        args = shlex.split(line)
         idPrinted = 0
         if args[0] == '':
             print("** class name missing **")
