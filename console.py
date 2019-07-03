@@ -18,24 +18,31 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
+        args = str(line).split(' ')
         if len(line) == 0:
             print("** class name missing **")
-        elif line != "BaseModel":
+        elif not args[0] in models.storage.validClasses:
             print("** class doesn't exist **")
         else:
-            my_model = BaseModel()
+            my_model = models.storage.validClasses[args[0]]()
             my_model.save()
             print(my_model.id)
 
     def do_all(self, line):
-        if line != "BaseModel" and line != "":
-            print("** class doesn't exist **")
-        else:
-            objects = models.storage.all()
-            toPrint = []
+        args = str(line).split(' ')
+        objects = models.storage.all()
+        toPrint = []
+        if args[0] == "":
             for k, v in objects.items():
                 toPrint.append(str(v))
-
+            print(toPrint)
+        elif not args[0] in models.storage.validClasses:
+            print("** class doesn't exist **")
+        else:
+            for k, v in objects.items():
+                cname = str(k).split('.')
+                if args[0] == cname[0]:
+                    toPrint.append(str(v))
             print(toPrint)
 
     def do_show(self, line):
