@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import cmd
-from models.base_model import BaseModel
 import models
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -38,15 +38,28 @@ class HBNBCommand(cmd.Cmd):
             print(toPrint)
 
     def do_show(self, line):
-        if len(line) == 0:
+        args = str(line).split(' ')
+        idPrinted = 0
+        if args[0] == '':
             print("** class name missing **")
-        elif line != "BaseModel":
+        elif args[0] != "BaseModel":
             print("** class doesn't exist **")
+        elif len(args) < 2:
+            print("** instance id missing **")
         else:
             objects = models.storage.all()
             for k, v in objects.items():
                 model = str(k).split('.')
-                print(model)
+                if args[1] == model[1]:
+                    idPrinted = 1
+                    print(v)
+            if idPrinted is 0:
+                print("** no instance found **")
+
+    def help_show(self):
+        print("Prints the string representation of an instance "
+              "based on the class name and id.\n"
+              "Ex: $ show BaseModel 1234-1234-123\n")
 
     def help_all(self):
         print("Prints all string representation of all instances "
