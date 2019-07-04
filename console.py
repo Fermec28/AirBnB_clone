@@ -179,15 +179,29 @@ class HBNBCommand(cmd.Cmd):
                 elif "update(" in args[1]:
                     argument = args[1].replace("update(", "")
                     argument = argument[:-1]
+                    todict = argument[:]
                     arg = argument.split(',')
+                    sid = arg[0][1:-1]
                     val = args[0] + " "
-                    cont = 0
-                    for v in arg:
-                        if cont == 2:
-                            v = ' "' + v[1:] + '"'
-                        val = val + v
-                        cont += 1
-                    self.do_update(val)
+                    if arg[1][1] == '{':
+                        arg = todict.split(',', 1)
+                        print("str to send: {}".format(arg[1][1:]))
+                        dic = eval(arg[1][1:])
+                        dic['id'] = sid
+                        objects = models.storage.all()
+                        key = "{}.{}".format(args[0], sid)
+                        obj = models.storage.validClasses[args[0]](**dic)
+                        objects[key] = obj
+                        obj.save()
+
+                    else:
+                        cont = 0
+                        for v in arg:
+                            if cont == 2:
+                                v = ' "' + v[1:] + '"'
+                            val = val + v
+                            cont += 1
+                        self.do_update(val)
 
                 else:
                     print("*** Unknown syntax: {}".format(line))
