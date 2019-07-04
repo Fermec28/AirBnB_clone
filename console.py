@@ -68,7 +68,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """ destroy instance """
-        args = str(line).split(' ')
+        if not line:
+            args = ['']
+        else:
+            args = shlex.split(line)
         idPrinted = 0
         if args[0] == '':
             print("** class name missing **")
@@ -86,7 +89,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """ update instance """
-        args = shlex.split(line)
+        if not line:
+            args = ['']
+        else:
+            args = shlex.split(line)
         idPrinted = 0
         if args[0] == '':
             print("** class name missing **")
@@ -139,6 +145,53 @@ class HBNBCommand(cmd.Cmd):
 
     def emptyline(self):
         """ emptyline command"""
+
+    def default(self, line):
+        """capture defaults commands"""
+        args = str(line).split('.')
+        if not args[0] in models.storage.validClasses:
+            print("*** Unknown syntax: {}".format(line))
+        else:
+                if args[1] == "all()":
+                    self.do_all(args[0])
+
+                elif args[1] == "count()":
+                    objects = models.storage.all()
+                    cont = 0
+                    for k, v in objects.items():
+                        cname = str(k).split('.')
+                        if args[0] == cname[0]:
+                            cont += 1
+                    print(cont)
+
+                elif "show(" in args[1]:
+                    argument = args[1].replace("show(", "")
+                    argument = argument[:-1]
+                    val = "{} {}".format(args[0], argument)
+                    self.do_show(val)
+
+                elif "destroy(" in args[1]:
+                    argument = args[1].replace("destroy(", "")
+                    argument = argument[:-1]
+                    val = "{} {}".format(args[0], argument)
+                    self.do_destroy(val)
+
+                elif "update(" in args[1]:
+                    argument = args[1].replace("update(", "")
+                    argument = argument[:-1]
+                    arg = argument.split(',')
+                    val = args[0] + " "
+                    cont = 0
+                    for v in arg:
+                        if cont == 2:
+                            v = ' "' + v[1:] + '"'
+                        val = val + v
+                        cont += 1
+                    self.do_update(val)
+
+                else:
+                    print("*** Unknown syntax: {}".format(line))
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
