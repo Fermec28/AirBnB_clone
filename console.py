@@ -140,5 +140,17 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ emptyline command"""
 
+    def default(self, line):
+        """capture defaults commands"""
+        args = str(line).split('.')
+        if not args[0] in models.storage.validClasses:
+            print("*** Unknown syntax: {}".format(line))
+        else:
+                if args[1] == "all()":
+                    self.do_all(args[0])
+                else:
+                    print("*** Unknown syntax: {}".format(line))
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
