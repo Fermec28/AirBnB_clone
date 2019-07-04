@@ -170,6 +170,12 @@ class HBNBCommand(cmd.Cmd):
                     val = "{} {}".format(args[0], argument)
                     self.do_show(val)
 
+                elif "destroy(" in args[1]:
+                    argument = args[1].replace("destroy(", "")
+                    argument = argument[:-1]
+                    val = "{} {}".format(args[0], argument)
+                    self.do_destroy(val)
+
                 else:
                     print("*** Unknown syntax: {}".format(line))
 
