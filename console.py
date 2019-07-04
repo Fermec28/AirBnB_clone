@@ -154,14 +154,22 @@ class HBNBCommand(cmd.Cmd):
         else:
                 if args[1] == "all()":
                     self.do_all(args[0])
+
                 elif args[1] == "count()":
                     objects = models.storage.all()
                     cont = 0
                     for k, v in objects.items():
                         cname = str(k).split('.')
                         if args[0] == cname[0]:
-                            cont +=1
+                            cont += 1
                     print(cont)
+
+                elif "show(" in args[1]:
+                    argument = args[1].replace("show(", "")
+                    argument = argument[:-1]
+                    val = "{} {}".format(args[0], argument)
+                    self.do_show(val)
+
                 else:
                     print("*** Unknown syntax: {}".format(line))
 
