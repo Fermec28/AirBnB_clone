@@ -176,6 +176,19 @@ class HBNBCommand(cmd.Cmd):
                     val = "{} {}".format(args[0], argument)
                     self.do_destroy(val)
 
+                elif "update(" in args[1]:
+                    argument = args[1].replace("update(", "")
+                    argument = argument[:-1]
+                    arg = argument.split(',')
+                    val = args[0] + " "
+                    cont = 0
+                    for v in arg:
+                        if cont == 2:
+                            v = ' "' + v[1:] + '"'
+                        val = val + v
+                        cont += 1
+                    self.do_update(val)
+
                 else:
                     print("*** Unknown syntax: {}".format(line))
 
