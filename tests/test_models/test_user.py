@@ -5,6 +5,7 @@ from models import storage
 from models.user import User
 import pep8
 
+
 class TestUser(unittest.TestCase):
     '''Test BaseModel'''
     def setUp(self):
