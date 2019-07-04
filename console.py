@@ -68,7 +68,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, line):
         """ destroy instance """
-        args = str(line).split(' ')
+        if not line:
+            args = ['']
+        else:
+            args = shlex.split(line)
         idPrinted = 0
         if args[0] == '':
             print("** class name missing **")
@@ -86,7 +89,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, line):
         """ update instance """
-        args = shlex.split(line)
+        if not line:
+            args = ['']
+        else:
+            args = shlex.split(line)
         idPrinted = 0
         if args[0] == '':
             print("** class name missing **")
