@@ -35,6 +35,10 @@ class TestBaseModel(unittest.TestCase):
         '''test attribute'''
         self.assertTrue(hasattr(self.my_model, "updated_at"))
 
+    def test_has_attribute_save(self):
+        '''test attribute'''
+        self.assertTrue(hasattr(self.my_model, "save"))
+
     def test_has_attribute_class(self):
         '''test attribute'''
         self.assertTrue(hasattr(self.my_model_json, "__class__"))

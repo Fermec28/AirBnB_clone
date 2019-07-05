@@ -185,14 +185,14 @@ class HBNBCommand(cmd.Cmd):
                     val = args[0] + " "
                     if arg[1][1] == '{':
                         arg = todict.split(',', 1)
-                        print("str to send: {}".format(arg[1][1:]))
                         dic = eval(arg[1][1:])
                         dic['id'] = sid
                         objects = models.storage.all()
                         key = "{}.{}".format(args[0], sid)
-                        obj = models.storage.validClasses[args[0]](**dic)
-                        objects[key] = obj
-                        obj.save()
+                        if key in objects:
+                            obj = models.storage.validClasses[args[0]](**dic)
+                            objects[key] = obj
+                            obj.save()
 
                     else:
                         cont = 0
