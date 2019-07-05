@@ -193,6 +193,8 @@ class HBNBCommand(cmd.Cmd):
                             obj = models.storage.validClasses[args[0]](**dic)
                             objects[key] = obj
                             obj.save()
+                        else:
+                            print('OK')
 
                     else:
                         cont = 0
