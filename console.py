@@ -194,7 +194,7 @@ class HBNBCommand(cmd.Cmd):
                             objects[key] = obj
                             obj.save()
                         else:
-                            print('OK')
+                            print("** no instance found **")
 
                     else:
                         cont = 0
